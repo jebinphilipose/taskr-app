@@ -1,15 +1,25 @@
 import React from 'react';
 
 export default class AddTask extends React.Component {
+  state = {
+    error: undefined
+  };
+
   handleAddTask = (e) => {
     e.preventDefault();
     const task = e.target.elements.task.value.trim();
-    this.props.handleAddTask(task);
+    const error = this.props.handleAddTask(task);
+    // es6 shorthand for {error: error}
+    this.setState(() => ( {error} ));
+    if (!error) {
+      e.target.elements.task.value = '';
+    }
   };
 
   render() {
     return (
       <div>
+        {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.handleAddTask}>
           <input type="text" name="task"></input>
           <button>Add Task</button>

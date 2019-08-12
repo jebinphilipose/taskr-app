@@ -23,6 +23,11 @@ export default class TaskrApp extends React.Component {
   };
 
   handleAddTask = (task) => {
+    if (!task) {
+      return 'Please fill in some text.'
+    } else if (this.state.tasks.indexOf(task) > -1) {
+      return 'Enter a unique value.'
+    }
     this.setState((prevState) => ({ tasks: prevState.tasks.concat(task) }));
   };
 
