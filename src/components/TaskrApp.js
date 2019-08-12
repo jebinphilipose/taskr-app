@@ -3,10 +3,12 @@ import Header from './Header';
 import Action from './Action';
 import Tasks from './Tasks';
 import AddTask from './AddTask';
+import TaskModal from './TaskModal';
 
 export default class TaskrApp extends React.Component {
   state = {
-    tasks: []
+    tasks: [],
+    selectedTask: undefined
   };
 
   handleDeleteTasks = () => {
@@ -19,7 +21,7 @@ export default class TaskrApp extends React.Component {
 
   handlePick = () => {
     const randNum = Math.floor(Math.random() * this.state.tasks.length);
-    alert(this.state.tasks[randNum]);
+    this.setState(() => ({ selectedTask: this.state.tasks[randNum] }));
   };
 
   handleAddTask = (task) => {
@@ -29,6 +31,10 @@ export default class TaskrApp extends React.Component {
       return 'Enter a unique value.'
     }
     this.setState((prevState) => ({ tasks: prevState.tasks.concat(task) }));
+  };
+
+  handleCloseModal = () => {
+    this.setState(() => ({ selectedTask: undefined }));
   };
 
   componentDidMount() {
@@ -66,6 +72,7 @@ export default class TaskrApp extends React.Component {
         <Action hasTasks={this.state.tasks.length > 0} handlePick={this.handlePick} />
         <Tasks tasks={this.state.tasks} handleDeleteTasks={this.handleDeleteTasks} handleDeleteTask={this.handleDeleteTask} />
         <AddTask handleAddTask={this.handleAddTask} />
+        <TaskModal selectedTask={this.state.selectedTask} handleCloseModal={this.handleCloseModal} />
       </div>
     );
   }
