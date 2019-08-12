@@ -6,7 +6,7 @@ import AddTask from './AddTask';
 
 export default class TaskrApp extends React.Component {
   state = {
-    tasks: ['Task 1', 'Task 2', 'Task 3']
+    tasks: []
   };
 
   handleDeleteTasks = () => {
@@ -30,6 +30,32 @@ export default class TaskrApp extends React.Component {
     }
     this.setState((prevState) => ({ tasks: prevState.tasks.concat(task) }));
   };
+
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('tasks');
+      const tasks = JSON.parse(json);
+      // don't set tasks to null if it doesn't exist in localStorage
+      if (tasks) {
+        this.setState(() => ({ tasks }));
+      }
+    } catch (e) {
+      // do nothing, fallback to default state
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const tasks = this.state.tasks;
+    // only save to localStorage if state changes
+    if (prevState.tasks.length !== tasks.length) {
+      const json = JSON.stringify(tasks);
+      localStorage.setItem('tasks', json);
+    }
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount!');
+  }
 
   render() {
     const subtitle = 'Remember everything important';
