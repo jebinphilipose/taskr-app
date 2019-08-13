@@ -5,8 +5,8 @@
   "author": "Jebin Philipose",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
-    "dev-server": "webpack-dev-server"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --mode development"
   },
   "dependencies": {
     "@babel/core": "7.5.5",

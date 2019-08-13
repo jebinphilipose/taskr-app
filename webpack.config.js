@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'none',
   entry: './src/app.js',
   output: {
     'path': path.join(__dirname, '/public'),
@@ -14,7 +13,7 @@ module.exports = {
       exclude: /node_modules/
     }]
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, '/public')
   }
