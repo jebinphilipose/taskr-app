@@ -71,8 +71,10 @@ export default class TaskrApp extends React.Component {
         <Header subtitle={subtitle} />
         <div className="container">
           <Action hasTasks={this.state.tasks.length > 0} handlePick={this.handlePick} />
-          <Tasks tasks={this.state.tasks} handleDeleteTasks={this.handleDeleteTasks} handleDeleteTask={this.handleDeleteTask} />
-          <AddTask handleAddTask={this.handleAddTask} />
+          <div className="widget">
+            <Tasks tasks={this.state.tasks} handleDeleteTasks={this.handleDeleteTasks} handleDeleteTask={this.handleDeleteTask} />
+            <AddTask handleAddTask={this.handleAddTask} />
+          </div>
         </div>
         <TaskModal selectedTask={this.state.selectedTask} handleCloseModal={this.handleCloseModal} />
       </div>
