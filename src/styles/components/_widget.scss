@@ -8,6 +8,7 @@
     color: $off-white;
     margin: 0;
     padding: $l-size;
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -21,4 +22,10 @@
 
 .widget-header__title {
     margin: 0;
+}
+
+@media (min-width: $desktop-breakpoint) {
+    .widget__message {
+        font-size: 1.6rem;
+    }
 }
